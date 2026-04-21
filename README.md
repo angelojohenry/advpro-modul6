@@ -21,3 +21,6 @@ Blok else: Jika requestnya berbeda (misalnya browser meminta 127.0.0.1:7878/bad 
 - Selain mengirimkan status error, server juga akan mengirimkan sebuah file HTML khusus (halaman error 404) agar pengguna melihat tampilan peringatan yang rapi di browser, bukan sekadar layar kosong atau pesan connection error.
   ![Commit 3 screen capture](/assets/images/commit3.png)
 - Refactor diperlukan karena terdapat banyak repetisi di dalam blok if dan else. Mereka sama-sama membaca file dan menulis konten dari file ke dalam stream.
+
+# Commit 4 Reflection notes
+- Server yang ditulis berjalan secara synchronous pada satu thread. Ia hanya bisa melayani satu pelanggan pada satu waktu. Saat server sedang melayani /sleep, ia benar-benar sibuk dan membiarkan antrean request lain menumpuk. Ini mendemonstrasikan secara langsung mengapa aplikasi dunia nyata membutuhkan arsitektur konkuren (seperti Thread Pool) untuk melayani banyak request secara bersamaan tanpa saling memblokir.
