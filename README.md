@@ -24,3 +24,10 @@ Blok else: Jika requestnya berbeda (misalnya browser meminta 127.0.0.1:7878/bad 
 
 # Commit 4 Reflection notes
 - Server yang ditulis berjalan secara synchronous pada satu thread. Ia hanya bisa melayani satu pelanggan pada satu waktu. Saat server sedang melayani /sleep, ia benar-benar sibuk dan membiarkan antrean request lain menumpuk. Ini mendemonstrasikan secara langsung mengapa aplikasi dunia nyata membutuhkan arsitektur konkuren (seperti Thread Pool) untuk melayani banyak request secara bersamaan tanpa saling memblokir.
+
+# Commit 5 Reflection notes
+Cara kerja Thread Pool:
+- Listener: Main Thread bertugas mendengarkan koneksi jaringan yang masuk.
+- Queue: Setiap tugas dimasukkan ke dalam saluran komunikasi (seperti pipa mpsc di Rust).
+- Workers: Sejumlah thread siaga di latar belakang. Mereka secara terus-menerus memantau antrean.
+- Eksekusi Konkuren: Pekerja yang kosong mengambil tugas, memprosesnya, mengirimkan hasil berupa response ke browser, lalu kembali menganggur untuk mengambil tugas berikutnya.
