@@ -31,3 +31,17 @@ Cara kerja Thread Pool:
 - Queue: Setiap tugas dimasukkan ke dalam saluran komunikasi (seperti pipa mpsc di Rust).
 - Workers: Sejumlah thread siaga di latar belakang. Mereka secara terus-menerus memantau antrean.
 - Eksekusi Konkuren: Pekerja yang kosong mengambil tugas, memprosesnya, mengirimkan hasil berupa response ke browser, lalu kembali menganggur untuk mengambil tugas berikutnya.
+
+# Commit Bonus Reflection notes
+Beberapa perbandingan fungsi new dan fungsi build:
+1. Fungsi new sebelumnya menggunakan makro assert!(size > 0). Dalam konteks aplikasi server-side, penggunaan assert! yang memicu panic! memiliki beberapa kelemahan:
+- Jika user memberikan input 0, aplikasi akan langsung berhenti secara paksa (crash).
+- Library user tidak diberikan kesempatan untuk menangani kegagalan tersebut dengan anggun (graceful handling).
+2. Dengan mengubah fungsi menjadi build(size: usize) -> Result<ThreadPool, PoolCreationError>, logika inisialisasi kini mengikuti prinsip Error Handling yang lebih baik di Rust:
+- Kegagalan inisialisasi kini diperlakukan sebagai nilai balik, bukan sebagai error yang menghentikan program.
+- Fungsi secara eksplisit memberi tahu developer bahwa fungsi ini bisa gagal dan mereka wajib menangani kemungkinan tersebut.
+3. Beberapa prinsip yang diterapkan setelah menggunakan build:
+- Robustness: Meningkatkan ketahanan program terhadap input yang tidak valid
+- Separation of Concerns: Memisahkan logika pengecekan validitas input dari logikan pembuatan struktur data
+- Custom Error Type: Penggunaan PoolCreationError memungkinkan spesifikasi error yang lebih jelas di masa depan jika terdapat parameter lain yang divalidasi.
+
