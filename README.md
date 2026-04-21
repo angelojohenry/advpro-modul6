@@ -5,3 +5,11 @@
 - Metode .lines() membaca aliran data dan membaginya menjadi baris terpisah setiap mendeteksi adanya karakter newline.
 - Untuk mengambil nilai String, kode menggunakan fungsi .map() dan .unwrap()
 - Setelah semua baris berhasil dikumppulkan menjadi satu di dalam vector http_request, program akan mencetaknya ke layar konsol.
+
+# Commit 2 Reflection notes
+- Penambahan fs ke dalam pernyataan use tujuannya adalah mengimpor module file system dari standard library Rust. Tanpa modul ini, program tidak akan memiliki izin untuk berinteraksi dengan file yang ada di dalam hard drive server.
+- Dengan menggunakan modul fs, prgram membaca seluruh isi dari sebuah file.
+- fs::read_to_string akan mengambil kode HTML di dalam file dan menyimpannya ke dalam memori aplikasi sebagai tipe data String.
+- Makro format! berfungsi menggabungkan teks header HTTP standar dengan string berisi kode HTML ke dalam satu kesatuan teks yang disebut response body.
+- Header Content-Length di dalam response berfungsi agar pesan HTTP dianggap valid secara standar dan mencegah browser mengalami loading terus-menerus karena menunggu data yang sebenarnya sudah selesai dikirim.
+  ![Commit 2 screen capture](/assets/images/commit2.png)
