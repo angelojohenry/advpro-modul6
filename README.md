@@ -13,3 +13,10 @@
 - Makro format! berfungsi menggabungkan teks header HTTP standar dengan string berisi kode HTML ke dalam satu kesatuan teks yang disebut response body.
 - Header Content-Length di dalam response berfungsi agar pesan HTTP dianggap valid secara standar dan mencegah browser mengalami loading terus-menerus karena menunggu data yang sebenarnya sudah selesai dikirim.
   ![Commit 2 screen capture](/assets/images/commit2.png)
+
+# Commit 3 Reflection notes
+- Setelah baris pertama (request_line) berhasil diambil, program akan melakukan pengecekan:
+Blok if: Program mengecek apakah baris tersebut persis sama dengan GET / HTTP/1.1 . Jika cocok, server akan mengirimkan isi dari file hello.html.
+Blok else: Jika requestnya berbeda (misalnya browser meminta 127.0.0.1:7878/bad atau URL lainnya), program akan masuk ke blok else yang akan mengirimkan status error.
+- Selain mengirimkan status error, server juga akan mengirimkan sebuah file HTML khusus (halaman error 404) agar pengguna melihat tampilan peringatan yang rapi di browser, bukan sekadar layar kosong atau pesan connection error.
+  ![Commit 3 screen capture](/assets/images/commit3.png)
