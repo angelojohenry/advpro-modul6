@@ -20,3 +20,4 @@ Blok if: Program mengecek apakah baris tersebut persis sama dengan GET / HTTP/1.
 Blok else: Jika requestnya berbeda (misalnya browser meminta 127.0.0.1:7878/bad atau URL lainnya), program akan masuk ke blok else yang akan mengirimkan status error.
 - Selain mengirimkan status error, server juga akan mengirimkan sebuah file HTML khusus (halaman error 404) agar pengguna melihat tampilan peringatan yang rapi di browser, bukan sekadar layar kosong atau pesan connection error.
   ![Commit 3 screen capture](/assets/images/commit3.png)
+- Refactor diperlukan karena terdapat banyak repetisi di dalam blok if dan else. Mereka sama-sama membaca file dan menulis konten dari file ke dalam stream.
